@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DOCKERHUB_CREDENTIALS=credentials('shakya-dockerhub')
-    IMAGE_NAME='prabhashithwije/jenkins-example-ghcr'
+    IMAGE_NAME='shakyadev/jenkins-example-ghcr'
     IMAGE_VERSION='8.5-204'
   }
   stages {
@@ -22,7 +22,7 @@ pipeline {
         prismaCloudScanImage ca: '',
         cert: '',
         dockerAddress: 'unix:///var/run/docker.sock',
-        image: 'prabhashithwije/jenkins-example-ghcr:8.5-204',
+        image: 'shakyadev/jenkins-example-ghcr:8.5-204',
         key: '',
         logLevel: 'info',
         podmanPath: '',
