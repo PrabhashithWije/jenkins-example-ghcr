@@ -22,7 +22,7 @@ pipeline {
         prismaCloudScanImage ca: '',
         cert: '',
         dockerAddress: 'unix:///var/run/docker.sock',
-        image: $IMAGE_NAME,
+        image: 'prabhashithwije/jenkins-example-ghcr:8.5-204',
         key: '',
         logLevel: 'info',
         podmanPath: '',
