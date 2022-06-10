@@ -16,21 +16,7 @@ pipeline {
         sh 'docker build -t $IMAGE_NAME:$IMAGE_VERSION .'
       }
     }
-    stage('Scan') {
-      steps {
-        // Scan the image
-        prismaCloudScanImage ca: '',
-        cert: '',
-        dockerAddress: 'unix:///var/run/docker.sock',
-        image: $IMAGE_NAME,
-        key: '',
-        logLevel: 'info',
-        podmanPath: '',
-        project: '',
-        resultsFile: 'prisma-cloud-scan-results.json',
-        ignoreImageBuildTime:true
-      }
-    }
+
     stage('login to GHCR') {
       steps {
         sh 'echo $GITHUB_TOKEN_PSW | docker login ghcr.io -u $GITHUB_TOKEN_USR --password-stdin'
