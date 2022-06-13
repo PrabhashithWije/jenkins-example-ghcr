@@ -4,6 +4,8 @@ pipeline {
     DOCKERHUB_CREDENTIALS=credentials('shakya-dockerhub')
     IMAGE_NAME='shakyadev/jenkins-example-ghcr'
     IMAGE_VERSION='8.5-204'
+	COSIGN_PASSWORD=credentials('cosign-password')
+	COSIGN_PRIVATE_KEY=credentials('cosign-private-key')
   }
   stages {
     stage('cleanup') {
@@ -45,6 +47,12 @@ pipeline {
     stage('push image') {
       steps {
         sh 'docker push $IMAGE_NAME:$IMAGE_VERSION'
+      }
+    }
+	stage('sign the container image') {
+      steps {
+        sh 'cosign version'
+        sh 'cosign sign --key $COSIGN_PRIVATE_KEY $IMAGE_NAME:$IMAGE_VERSION'
       }
     }
   }
