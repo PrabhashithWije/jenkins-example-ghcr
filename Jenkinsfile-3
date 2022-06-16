@@ -53,13 +53,13 @@ pipeline {
     stage('sign the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign sign --key $COSIGN_PRIVATE_KEY $IMAGE_NAME:$IMAGE_VERSION'
+        sh 'COSIGN_EXPERIMENTAL=1 cosign sign --key $COSIGN_PRIVATE_KEY $IMAGE_NAME:$IMAGE_VERSION'
       }
     }
     stage('verify the container image') {
       steps {
         sh 'cosign version'
-        sh 'cosign verify --key $COSIGN_PUBLIC_KEY $IMAGE_NAME:$IMAGE_VERSION'
+        sh 'COSIGN_EXPERIMENTAL=1 cosign verify --key $COSIGN_PUBLIC_KEY $IMAGE_NAME:$IMAGE_VERSION'
       }
     }
   }
